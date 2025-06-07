@@ -7,45 +7,93 @@ namespace characterDesignAPI
         public CharacterDesignFormContext(DbContextOptions<CharacterDesignFormContext> options) : base(options)
         {
         }
-        public DbSet<CharacterChart> CharacterChart { get; set; }
+        public DbSet<CharacterChart> Characters { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CharacterChart>().ToTable("character_chart");
             // Configure the primary key for CharacterModel
             modelBuilder.Entity<CharacterChart>(entity =>
             {
                 entity.Property(c => c.CharacterId)
                     .IsRequired()
-                    .HasMaxLength(36) // Id is a GUID
+                    .HasMaxLength(50) // Id is a GUID
+                    //.HasConversion(
+                    //    v => v.ToString(), // Convert to string for storage
+                    //    v => v // Convert back to string when reading
+                    //)
+                    .HasColumnName("character_id");
+            }
+            );
+            modelBuilder.Entity<CharacterChart>(entity =>
+            {
+                entity.Property(c => c.FullName)
+                    .HasMaxLength(50)
                     .HasConversion(
                         v => v.ToString(), // Convert to string for storage
                         v => v // Convert back to string when reading
                     )
-                    .HasColumnName("character_id");
+                    .HasColumnName("full_name");
             }
             );
-            //    .HasColumnName("character_id")  
-            //    .HasKey(c => c.Id);
-            //// Configure other properties if needed
-            //modelBuilder.Entity<CharacterModel>()
-            //    .Property(c => c.FullName)
-            //    .HasMaxLength(50);
-            //modelBuilder.Entity<CharacterModel>()
-            //    .Property(c => c.Nickname)
-            //    .HasMaxLength(50);
-            //modelBuilder.Entity<CharacterModel>()
-            //    .Property(c => c.ReasonName)
-            //    .HasMaxLength(220);
-            //modelBuilder.Entity<CharacterModel>()
-            //    .Property(c => c.ReasonNickname)
-            //    .HasMaxLength(220);
-            //modelBuilder.Entity<CharacterModel>()
-            //    .Property(c => c.BirthDate)
-            //    .HasColumnType("date");
-            //modelBuilder.Entity<CharacterModel>()
-            //    .Property(c => c.DateCreated)
-            //    .HasColumnType("datetime");
-            // Add more configurations as necessary
+            modelBuilder.Entity<CharacterChart>(entity =>
+            {
+                entity.Property(c => c.ReasonName)
+                    .HasMaxLength(220)
+                    .HasConversion(
+                        v => v.ToString(), // Convert to string for storage
+                        v => v // Convert back to string when reading
+                    )
+                    .HasColumnName("reason_name");
+            }
+            );
+            modelBuilder.Entity<CharacterChart>(entity =>
+            {
+                entity.Property(c => c.Nickname)
+                    .HasMaxLength(50)
+                    .HasConversion(
+                        v => v.ToString(), // Convert to string for storage
+                        v => v // Convert back to string when reading
+                    )
+                    .HasColumnName("nickname");
+            }
+            );
+            modelBuilder.Entity<CharacterChart>(entity =>
+            {
+                entity.Property(c => c.ReasonNickname)
+                    .HasMaxLength(220)
+                    .HasConversion(
+                        v => v.ToString(), // Convert to string for storage
+                        v => v // Convert back to string when reading
+                    )
+                    .HasColumnName("reason_nickname");
+            }
+            );
+            modelBuilder.Entity<CharacterChart>(entity =>
+            {
+                entity.Property(c => c.Birthdate)
+                .HasConversion(
+                        v => v.ToString(), // Convert to string for storage
+                        v => v // Convert back to string when reading
+                    )
+                .HasColumnName("birthdate");
+            }
+            );
+            modelBuilder.Entity<CharacterChart>(entity =>
+            {
+                entity.Property(c => c.Age)
+                    .HasColumnName("age");
+            }
+            );
+            modelBuilder.Entity<CharacterChart>(entity =>
+            {
+                entity.Property(c => c.DateCreated)
+                    .HasColumnName("date_created")
+                    .HasColumnType("datetime2(0)");
+            }
+            );
+
+            
         }
     }
 }

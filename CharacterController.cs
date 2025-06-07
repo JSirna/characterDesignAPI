@@ -13,5 +13,5 @@ public class CharacterController : ControllerBase
         _context = context;
     }
     [HttpGet]
-    public async Task<IEnumerable<CharacterChart>> Get() => await _context.CharacterChart.ToListAsync();
+    public async Task<IEnumerable<CharacterChart>> Get() => await _context.Characters.ToListAsync();
 }
