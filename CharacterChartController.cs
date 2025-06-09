@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 [ApiController]
 [Produces("application/json")]
 [Route("api/get-characters")]
-public class CharacterController : ControllerBase
+public class CharacterChartController : ControllerBase
 {
     private readonly CharacterDesignFormContext _context;
-    public CharacterController(CharacterDesignFormContext context)
+    public CharacterChartController(CharacterDesignFormContext context)
     {
         _context = context;
     }
     [HttpGet]
-    public async Task<IEnumerable<CharacterChart>> Get() => await _context.Characters.ToListAsync();
+    public async Task<IEnumerable<CharacterChart>> GetCharacters() => await _context.Characters.ToListAsync();
 }
