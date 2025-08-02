@@ -1,4 +1,5 @@
-﻿using characterDesignAPI;
+﻿using characterDesignAPI.Common;
+using characterDesignAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

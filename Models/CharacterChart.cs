@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace characterDesignAPI
+namespace characterDesignAPI.Models
 {
     public class CharacterChart
     {

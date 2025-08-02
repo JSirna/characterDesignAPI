@@ -1,4 +1,4 @@
-using characterDesignAPI;
+using characterDesignAPI.Common;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,13 +17,22 @@ try
     builder.Services.AddEndpointsApiExplorer();
     //builder.Services.AddSwaggerGen();
 
+    builder.Services.AddCors(options => // Cors should be locked down once development is finished
+    {
+        options.AddPolicy("AllowAll", builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+    });
+
     var app = builder.Build();
+    app.UseCors("AllowAll");
 
     // Middleware pipeline
     if (app.Environment.IsDevelopment())
     {
-        //app.UseSwagger();
-        //app.UseSwaggerUI();
         app.UseDeveloperExceptionPage();
     }
     else
@@ -42,6 +51,8 @@ try
 
     // React SPA fallback
     app.MapFallbackToFile("index.html");
+
+
 
     // Run the app
     app.Run();

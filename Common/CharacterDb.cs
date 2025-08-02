@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using characterDesignAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace characterDesignAPI
+namespace characterDesignAPI.Common
 {
     public class CharacterDesignFormContext : DbContext
     {

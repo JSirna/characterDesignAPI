@@ -1,4 +1,4 @@
-﻿namespace characterDesignAPI
+﻿namespace characterDesignAPI.Models
 {
     public class CharacterFamily
     {
