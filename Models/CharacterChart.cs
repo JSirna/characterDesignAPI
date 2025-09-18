@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace characterDesignAPI.Models
 {
@@ -8,7 +8,6 @@ namespace characterDesignAPI.Models
     {
         [Key] //denote primary key
         [Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [JsonIgnore]
         public Guid CharacterId { get; set; }// = Guid.NewGuid();
         public string? FullName { get; set; }
         public string? ReasonName { get; set; }
@@ -16,9 +15,8 @@ namespace characterDesignAPI.Models
         public string? ReasonNickname { get; set; }
         public string? Birthdate { get; set; }
         public int? Age { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [JsonIgnore]
-        public DateTime DateCreated { get; set; } //= DateTime.Now;
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // why does using identity here work, and is there a cleaner/more robust way to insert current datetime?
+        public DateTime DateCreated { get; set; } = DateTime.Now; // for global applications, datetime should probably be utc format, not localized
 
     }
 }

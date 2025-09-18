@@ -74,7 +74,7 @@ namespace characterDesignAPI.Controllers
         public async Task<ActionResult<CharacterChart>> PostCharacterChart(CharacterChart characterChart)
         {
             characterChart.CharacterId = Guid.NewGuid();
-            //characterChart.DateCreated = DateTime.Now;
+            characterChart.DateCreated = DateTime.Now;
             _context.Characters.Add(characterChart);
             await _context.SaveChangesAsync();
 
