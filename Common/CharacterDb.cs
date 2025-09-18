@@ -8,7 +8,7 @@ namespace characterDesignAPI.Common
         public CharacterDesignFormContext(DbContextOptions<CharacterDesignFormContext> options) : base(options)
         {
         }
-        public DbSet<CharacterChart> Characters { get; set; }
+        public DbSet<CharacterChart> Characters { get; set; } // get list of characters
         public DbSet<CharacterFamily> Families { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -22,6 +22,7 @@ namespace characterDesignAPI.Common
                     .IsRequired()
                     .HasMaxLength(50) // Id is a GUID
                     .HasColumnName("character_id");
+                    //.HasDefaultValueSql("NEWID()");
                 entity.HasKey(c => c.CharacterId); // Set CharacterId as the primary key
             }
             );
@@ -88,8 +89,9 @@ namespace characterDesignAPI.Common
             modelBuilder.Entity<CharacterChart>(entity =>
             {
                 entity.Property(c => c.DateCreated)
-                    .HasColumnName("date_created")
-                    .HasColumnType("datetime2(0)");
+                    .HasColumnName("date_created");
+                   // .HasColumnType("datetime2(0)");
+                   // .HasDefaultValueSql("GETDATE()");
             }
             );
             #endregion
