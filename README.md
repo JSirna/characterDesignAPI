@@ -14,7 +14,7 @@ Backend for the Character Design Form
 
 ## How to Run
 Via Postman: 
-- GET request:  `http://localhost:5067/api/get-characters`
+- GET request:  `http://localhost:5067/api/character`
 - Sample Output:
 ```json
 [
